@@ -75,9 +75,9 @@ namespace SpinMotion
             else
             {
                 Vector3 fwd = transform.forward;
-                if (m_Rigidbody.velocity.magnitude > m_CarController.MaxSpeed*0.1f)
+                if (m_Rigidbody.linearVelocity.magnitude > m_CarController.MaxSpeed*0.1f)
                 {
-                    fwd = m_Rigidbody.velocity;
+                    fwd = m_Rigidbody.linearVelocity;
                 }
 
                 float desiredSpeed = m_CarController.MaxSpeed;
