@@ -13,6 +13,7 @@ public class Vehicle : MonoBehaviour
     private InputAction _move;
     private InputAction _brake;
     private Rigidbody _rb;
+    private BoxCollider _col;
 
     private float turnForce = 0;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -20,6 +21,7 @@ public class Vehicle : MonoBehaviour
     {
         _actions = new Default();
         _rb = GetComponent<Rigidbody>();
+        _col = GetComponent<BoxCollider>();
     }
 
     private void OnEnable()
@@ -36,10 +38,7 @@ public class Vehicle : MonoBehaviour
         var dir = _move.ReadValue<Vector2>();
         var brake = _brake.IsPressed();
 
-        if (dir.y != 0)
-        {
-            _rb.linearVelocity += transform.forward * moveSpeed;
-        }
+        // check if we are touching ground
         if (dir.x != 0)
         {
             turnForce += turnSpeed * dir.x;
@@ -50,6 +49,15 @@ public class Vehicle : MonoBehaviour
         if (brake)
         {
             _rb.linearVelocity *= brakeForce;
+        }
+    }
+
+    private void OnCollisionStay(Collision other)
+    {
+        var dir = _move.ReadValue<Vector2>();
+        if (dir.y != 0)
+        {
+            _rb.linearVelocity += transform.forward * moveSpeed;
         }
     }
 }

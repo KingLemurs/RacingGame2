@@ -103,9 +103,9 @@ public partial class @Default: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": ""Brake"",
-                    ""type"": ""Button"",
+                    ""type"": ""Value"",
                     ""id"": ""1bb42cec-9f3f-4e15-bdfc-c17decc6a3b4"",
-                    ""expectedControlType"": """",
+                    ""expectedControlType"": ""Digital"",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
