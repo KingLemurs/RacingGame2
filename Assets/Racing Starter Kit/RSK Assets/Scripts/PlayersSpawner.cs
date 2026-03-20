@@ -113,7 +113,7 @@ namespace SpinMotion
                 Rigidbody[] rigidbodies = player.go.GetComponentsInChildren<Rigidbody>();
                 foreach (var rb in rigidbodies)
                 {
-                    rb.velocity = Vector3.zero;
+                    rb.linearVelocity = Vector3.zero;
                     rb.angularVelocity = Vector3.zero;
                     rb.rotation = player.spawnRot;
                 }

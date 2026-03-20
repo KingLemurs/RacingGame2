@@ -71,7 +71,7 @@ namespace SpinMotion
 
         private void Update()
         {
-            aiCarSpeed = aiCarRigidbody.velocity.magnitude;
+            aiCarSpeed = aiCarRigidbody.linearVelocity.magnitude;
 
             if (aiCarSpeed < slowSpeedThreshold && checkReverse)
             {
