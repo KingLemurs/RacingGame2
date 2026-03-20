@@ -1,4 +1,5 @@
 using System;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -15,6 +16,7 @@ public class Vehicle : MonoBehaviour
     private Rigidbody _rb;
     private BoxCollider _col;
 
+    private Vector3 _LastCheckpoint;
     private float turnForce = 0;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
@@ -22,6 +24,7 @@ public class Vehicle : MonoBehaviour
         _actions = new Default();
         _rb = GetComponent<Rigidbody>();
         _col = GetComponent<BoxCollider>();
+        _LastCheckpoint = transform.position;
     }
 
     private void OnEnable()
@@ -49,6 +52,21 @@ public class Vehicle : MonoBehaviour
         if (brake)
         {
             _rb.linearVelocity *= brakeForce;
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        _LastCheckpoint = transform.position;
+    }
+
+    private void OnCollisionEnter(Collision other)
+    {
+        if (other.gameObject.CompareTag("Bad"))
+        {
+            _rb.linearVelocity = Vector3.zero;
+            _rb.angularVelocity = Vector3.zero;
+            this.transform.position = _LastCheckpoint;
         }
     }
 
