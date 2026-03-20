@@ -9,12 +9,15 @@ namespace Source
         public int LastCheckpoint = 8;
         public int CurrentCheckpoint = 0;
         public int CurrentLap = 1;
+        public GameObject player;
 
         public UnityEvent OnCheckpointReached = new();
+        public UnityEvent OnPlayerDeath = new();
 
 
         private void Start()
         {
+            
             StartRound();
         }
 

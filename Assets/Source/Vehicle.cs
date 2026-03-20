@@ -1,4 +1,5 @@
 using System;
+using Source;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -15,6 +16,7 @@ public class Vehicle : MonoBehaviour
     private InputAction _brake;
     private Rigidbody _rb;
     private BoxCollider _col;
+    private Gamemode _mode;
 
     private Vector3 _LastCheckpoint;
     private float turnForce = 0;
@@ -25,6 +27,7 @@ public class Vehicle : MonoBehaviour
         _rb = GetComponent<Rigidbody>();
         _col = GetComponent<BoxCollider>();
         _LastCheckpoint = transform.position;
+        _mode = GameObject.FindGameObjectWithTag("GameController").GetComponent<Gamemode>();
     }
 
     private void OnEnable()
@@ -55,9 +58,11 @@ public class Vehicle : MonoBehaviour
         }
     }
 
+    // died
     private void OnTriggerEnter(Collider other)
     {
         _LastCheckpoint = transform.position;
+        _mode.OnPlayerDeath.Invoke();
     }
 
     private void OnCollisionEnter(Collision other)
